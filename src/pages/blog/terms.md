@@ -22,3 +22,7 @@ We do our best to provide accurate information, but we cannot guarantee that the
 ## Changes to this document
 
 We reserve the right to modify this document at any time. Changes will be published on this page.
+
+## Consent
+
+By using our chatbots, you agree to the terms of this document.
