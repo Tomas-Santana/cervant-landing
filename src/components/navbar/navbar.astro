@@ -35,7 +35,7 @@ const menuitems = [
 ---
 
 <Container>
-  <header class="flex flex-col lg:flex-row justify-between items-center my-5">
+  <header class="flex flex-col lg:flex-row justify-between items-center my-5 ">
     <Astronav>
       <div class="flex w-full lg:w-auto items-center justify-between">
         <a href="/" class="text">
@@ -88,8 +88,10 @@ const menuitems = [
 </Container>
 
 <style>
-  .logo:hover {
-    transform: rotate(270deg);
+  .logo {
     transition: transform 0.9s cubic-bezier(0.075, 0.82, 0.165, 1.25);
+  }
+  .logo:hover {
+    transform: rotate(180deg);
   }
 </style>

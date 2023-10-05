@@ -1,26 +1,43 @@
 ---
 // @ts-ignore
 import { Icon } from "astro-icon";
+import features1 from "assets/features_1.webp";
+import features2 from "assets/features_2.webp";
+import features3 from "assets/features_3.webp";
+import features4 from "assets/features_4.webp"
+
+
 
 const features = [
   {
     title: "100% customizable",
     description:
       "Taylor-made for your business. No more generic chatbots that don't fit your needs.",
-    icon: "bx:bxs-briefcase",
+    img: features1.src,
+    alt: "100% customizable",
   },
   {
     title: "Ultra-fast response times",
     description:
       "Cervant is built on top of the latest technologies, so you can be sure your chatbot will be blazing fast.",
-    icon: "bx:bxs-window-alt",
+    img: features2.src,
+    alt: "Ultra-fast response times",
   },
+  // {
+  //   title: "Easy to set up",
+  //   description:
+  //     "Cervant is easy to set up. Just follow the instructions and you'll be up and running in no time.",
+  //   img: features3.src,
+  //   alt: "Easy to set up",
+  // },
   {
-    title: "Easy to set up",
-    description:
-      "Cervant is easy to set up. Just follow the instructions and you'll be up and running in no time.",
-    icon: "bx:bxs-data",
-  },
+    title: "Multi-language out of the box",
+    description: "With Cervant, your virtual assistant will speak naturally in the language your customer prefers.",
+    img: features4.src,
+    alt: "Multi-language out of the box",
+
+    
+  }
 ];
 ---
 
@@ -36,15 +53,20 @@ const features = [
 <div class="grid sm:grid-cols-2 md:grid-cols-3 mt-16 gap-16">
   {
     features.map((item) => (
-      <div class="flex gap-4 items-start">
-        <div class="mt-1 bg-black rounded-full  p-2 w-8 h-8 shrink-0">
-          <Icon class="text-white" name={item.icon} />
+
+      <div class="flex flex-col gap-4 justify-items-center items-center max-w-1/3">
+        <div class="mt-1  p-2 w-64 h-64 shrink-0 flex items-center ">
+          <img src={item.img} alt={item.alt} width="500px">
         </div>
         <div>
-          <h3 class="font-semibold text-lg">{item.title}</h3>{" "}
-          <p class="text-slate-500 mt-2 leading-relaxed">{item.description}</p>
+          <h3 class="font-semibold text-lg text-center">{item.title}</h3>{" "}
+          <p class="text-slate-500 mt-2 leading-relaxed text-center">{item.description}</p>
         </div>
       </div>
     ))
   }
 </div>
+
+<style>
+  
+</style>
