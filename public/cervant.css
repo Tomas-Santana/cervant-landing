@@ -1,0 +1,222 @@
+.message-container__cervant {
+    display: flex;
+    align-items: center;
+
+    width: calc(100%-20px);
+    margin: 10px;
+    padding: 20px 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.avatar-container__cervant, .avatar-container__cervant img {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    width: 40px;
+    height: 40px
+
+}
+.chat-bubble__cervant {
+    color: black;
+    border-radius: 10px;
+    padding: 10px 20px;
+    max-width: 80%;
+    font-size: 1.2rem;
+    position: relative;
+
+    animation: newMessage 0.2s ease-in-out;
+}
+
+
+@keyframes newMessage {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+html, body {
+    scroll-behavior: smooth;
+}
+.open-button__cervant {
+    background: var(--avatar-url);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease-in-out;
+}
+.open-button__cervant:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+.dialog__cervant {
+    width: 400px;
+    height: 600px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
+
+}
+
+.dialog-content__cervant {
+    width: 100%;
+    height: 100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+}
+
+.dialog__cervant[open] {
+    animation: appear 0.2s ease-in-out;
+}
+dialog.dialog__cervant--closing {
+    animation: disappear 0.2s ease-in-out;
+}
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes disappear {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.header__cervant {
+    background: #010101;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+}
+
+.header-avatar__cervant {
+    border-radius:50%;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+}
+.header-avatar__cervant img {
+    border-radius:50%;
+    width: 50px;
+    height: 50px;
+}
+
+.header__cervant h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    text-align: center;
+    color: white
+
+}
+.header-button__cervant {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    outline: none;
+}
+.header-button__cervant:hover svg path{
+    stroke: red;
+}
+
+.header-button__cervant svg path{
+    stroke: white;
+}
+
+.chat-area__cervant {
+    flex:1;
+    overflow: auto;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.input-field__cervant {
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+    padding: 10px;
+    height: 80px;
+    gap: 10px;
+}
+
+.input-field__cervant input {
+    height: 40px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    border-radius:10px; 
+    padding: 7px;
+    flex: 1;
+    transition: .2s ease;
+
+}
+.input-field__cervant input:focus, .input-field__cervant input:hover {
+    outline: none;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+
+}
+.input-field__cervant button {
+    background-color: green;
+    width:40px;
+    height:40px;
+    border-radius: 50%;
+    display: grid;
+    place-items:center;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+
+    transition: .25s ease;
+}
+
+.input-field__cervant button:hover {
+    transform: rotate(-25deg);
+}
+
+.sr-only__cervant {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.dialog-focussed__cervant {
+    height: 300px;
+    transform: translateY(-150px);
+}

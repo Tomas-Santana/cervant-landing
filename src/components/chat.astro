@@ -1,0 +1,22 @@
+---
+import { avatarSizes } from "@rneui/base/dist/Avatar/Avatar";
+import Chatbubble from "./chatbubble.astro";
+---
+
+<div class="chat w-64 h-64 rounded-sm border-black border">
+    <Chatbubble
+        type="user"
+        message="Hello, how are you?"
+        name="user"
+        avatar="https://ui-avatars.com/api/?background=0D8ABC&color=fff"
+    />
+    <Chatbubble
+        type="bot"
+        message="Hello, how are you?"
+        name="bot"
+        avatar="https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=Agui"
+    />
+
+    
+</div>
+
