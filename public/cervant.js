@@ -1,9 +1,6 @@
 class Chatbubble {
     constructor(message, type, avatar) {
 
-
-
-
         this.messageContainer = document.createElement('div');
         this.messageContainer.classList.add('message-container__cervant');
         this.messageContainer.classList.add(`message-container__cervant--${type}`);
@@ -35,9 +32,9 @@ class Chatbubble {
     }
 }
 
-class Chat extends HTMLElement {
+class Cervant extends HTMLElement {
 
-    constructor(title, startMessage, avatar, userAvatar) {
+    constructor(endpoint, apiKey, name, startMessage, avatar, userAvatar) {
         super()
 
         // set css variables
@@ -53,6 +50,8 @@ class Chat extends HTMLElement {
 
         this.avatar = avatar;
         this.userAvatar = userAvatar;
+        this.endpoint = endpoint;
+        this.apiKey = apiKey;
 
         this.chatArea = document.createElement('div')
         this.chatArea.classList.add('chat-area__cervant')
@@ -81,7 +80,7 @@ class Chat extends HTMLElement {
         dialogContent.appendChild(this.chatArea)
 
         header.innerHTML = `
-            <h1>Ask ${title}</h1>
+            <h1>Ask ${name}</h1>
             <button class="header-button__cervant">
                 <?xml version="1.0" encoding="UTF-8"?><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="none" stroke-width="1.5" viewBox="0 0 24 24" color="#000000"><path stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M6.758 17.243 12.001 12m5.243-5.243L12 12m0 0L6.758 6.757M12.001 12l5.243 5.243"></path></svg>
                 <span class="sr-only__cervant">Close</span>
@@ -145,194 +144,6 @@ class Chat extends HTMLElement {
 
         this.dialog.appendChild(dialogContent);
 
-
-
-        const style = document.createElement('style')
-        style.textContent = `
-            html, body {
-                scroll-behavior: smooth;
-            }
-            .open-button__cervant {
-                background: url(${avatar});
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                border-radius: 50%;
-                height: 50px;
-                width: 50px;
-                border: none;
-                cursor: pointer;
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-                transition: transform 0.2s ease-in-out;
-            }
-            .open-button__cervant:hover {
-                transform: scale(1.1);
-                box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            }
-            .dialog__cervant {
-                width: 400px;
-                height: 600px;
-                border-radius: 10px;
-                overflow: hidden;
-                border: none;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-                transition: all 0.2s ease-in-out;
-
-            }
-
-            .dialog-content__cervant {
-                width: 100%;
-                height: 100%;
-                display:flex;
-                flex-direction:column;
-                justify-content:flex-start;
-            }
-
-            .dialog__cervant[open] {
-                animation: appear 0.2s ease-in-out;
-            }
-            dialog.dialog__cervant--closing {
-                animation: disappear 0.2s ease-in-out;
-            }
-            @keyframes appear {
-                from {
-                    opacity: 0;
-                }
-                to {
-                    opacity: 1;
-                }
-            }
-            @keyframes disappear {
-                from {
-                    opacity: 1;
-                }
-                to {
-                    opacity: 0;
-                }
-            }
-
-            .header__cervant {
-                background: #010101;
-                border-bottom: 1px solid #ddd;
-                padding: 10px 20px;
-                position: relative;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 70px;
-            }
-
-            .header-avatar__cervant {
-                border-radius:50%;
-                width: 50px;
-                height: 50px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-                
-                position: absolute;
-                top: 50%;
-                left: 20px;
-                transform: translateY(-50%);
-            }
-            .header-avatar__cervant img {
-                border-radius:50%;
-                width: 50px;
-                height: 50px;
-            }
-
-            .header__cervant h1 {
-                margin: 0;
-                font-size: 1.5rem;
-                text-align: center;
-                color: white
-
-            }
-            .header-button__cervant {
-                position: absolute;
-                top: 50%;
-                right: 20px;
-                transform: translateY(-50%);
-                border: none;
-                background: none;
-                font-size: 1.2rem;
-                cursor: pointer;
-                outline: none;
-            }
-            .header-button__cervant:hover svg path{
-                stroke: red;
-            }
-
-            .header-button__cervant svg path{
-                stroke: white;
-            }
-
-            .chat-area__cervant {
-                flex:1;
-                overflow: auto;
-                display: flex;
-                flex-direction: column-reverse;
-            }
-
-            .input-field__cervant {
-                display: flex;
-                justify-content: space-around;
-                align-items:center;
-                padding: 10px;
-                height: 80px;
-                gap: 10px;
-            }
-
-            .input-field__cervant input {
-                height: 40px;
-                box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-                border-radius:10px; 
-                padding: 7px;
-                flex: 1;
-                transition: .2s ease;
-
-            }
-            .input-field__cervant input:focus, .input-field__cervant input:hover {
-                outline: none;
-                box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-
-            }
-            .input-field__cervant button {
-                background-color: green;
-                width:40px;
-                height:40px;
-                border-radius: 50%;
-                display: grid;
-                place-items:center;
-                box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-
-                transition: .25s ease;
-            }
-
-            .input-field__cervant button:hover {
-                transform: rotate(-25deg);
-            }
-        
-            .sr-only__cervant {
-                position: absolute;
-                width: 1px;
-                height: 1px;
-                padding: 0;
-                margin: -1px;
-                overflow: hidden;
-                clip: rect(0, 0, 0, 0);
-                white-space: nowrap;
-                border-width: 0;
-            }
-
-            .dialog-focussed__cervant {
-                height: 300px;
-                transform: translateY(-150px);
-            }
-        `
-        // document.body.appendChild(style)
-
         this.openButton.addEventListener('click', () => {
             this.dialog.showModal()
             // scroll to top
@@ -361,9 +172,10 @@ class Chat extends HTMLElement {
 
     respond(message) {
         const payload = {
-            message: message
+            message: message,
+            key: this.apiKey
         }
-        const response = fetch('https://c6e3-181-232-182-96.ngrok-free.app/webchat',
+        const response = fetch(this.endpoint,
             {
                 method: 'POST',
                 headers: {
@@ -374,7 +186,7 @@ class Chat extends HTMLElement {
         )
         .then(res => res.json())
         .then(res => {
-            const bubble = new Chatbubble(res.response, 'cervant', this.avatar)
+            const bubble = new Chatbubble(res.message, 'cervant', this.avatar)
             this.chatAreaContainer.appendChild(bubble.messageContainer)
         })
         
@@ -383,9 +195,15 @@ class Chat extends HTMLElement {
 // global 
 
 
-customElements.define('cervant-chat', Chat)
+customElements.define('cervant-chat', Cervant)
 
-const chat = new Chat('Cervant', 'Hello there!', 'https://www.thegreenhead.com/imgs/xl/genuine-lifesize-lost-in-space-b-9-robot-xl.jpg', 'https://img.myloview.com/stickers/user-icon-human-person-symbol-avatar-login-sign-400-260980474.jpg')
+const chat = new Cervant(
+    'https://c6e3-181-232-182-96.ngrok-free.app/webchat',
+    "popo",
+    'Cervant',
+    'Hello there!',
+    'https://www.thegreenhead.com/imgs/xl/genuine-lifesize-lost-in-space-b-9-robot-xl.jpg', 'https://img.myloview.com/stickers/user-icon-human-person-symbol-avatar-login-sign-400-260980474.jpg'
+)
 chat.addToBody()
 
 console.log("hello!")

@@ -92,8 +92,8 @@ class Chat extends HTMLElement {
     }
 }
 
-customElements.define('cervant-chat', Chat)
+customElements.define('cervant-chat', Cervant)
 
-const chat = new Chat('Cervant', 'Hello there!', 'https://avatars.githubusercontent.com/u/72873100?v=4')
+const chat = new Cervant('Cervant', 'Hello there!', 'https://avatars.githubusercontent.com/u/72873100?v=4')
 
 document.body.appendChild(chat)
