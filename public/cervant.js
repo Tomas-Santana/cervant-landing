@@ -211,5 +211,5 @@ console.log("hello!")
 const styleLink = document.createElement('link')
 
 styleLink.setAttribute('rel', 'stylesheet')
-styleLink.setAttribute('href', '/cervant.css')
+styleLink.setAttribute('href', 'https://cervant.chat/cervant.css')
 document.head.appendChild(styleLink)
