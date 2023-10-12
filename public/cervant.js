@@ -363,7 +363,7 @@ class Chat extends HTMLElement {
         const payload = {
             message: message
         }
-        const response = fetch('https://showcase-bot-3.azurewebsites.net/webchat',
+        const response = fetch('https://c6e3-181-232-182-96.ngrok-free.app/webchat',
             {
                 method: 'POST',
                 headers: {
