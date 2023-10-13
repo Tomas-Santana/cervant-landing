@@ -198,11 +198,12 @@ class Cervant extends HTMLElement {
 customElements.define('cervant-chat', Cervant)
 
 const chat = new Cervant(
-    'https://c6e3-181-232-182-96.ngrok-free.app/webchat',
+    'none',
     "popo",
     'Cervant',
     'Hello there!',
-    'https://www.thegreenhead.com/imgs/xl/genuine-lifesize-lost-in-space-b-9-robot-xl.jpg', 'https://img.myloview.com/stickers/user-icon-human-person-symbol-avatar-login-sign-400-260980474.jpg'
+    'https://www.thegreenhead.com/imgs/xl/genuine-lifesize-lost-in-space-b-9-robot-xl.jpg', 
+    'https://img.myloview.com/stickers/user-icon-human-person-symbol-avatar-login-sign-400-260980474.jpg'
 )
 chat.addToBody()
 
@@ -211,5 +212,5 @@ console.log("hello!")
 const styleLink = document.createElement('link')
 
 styleLink.setAttribute('rel', 'stylesheet')
-styleLink.setAttribute('href', 'https://cervant.chat/cervant.css')
+styleLink.setAttribute('href', '/cervant.css')
 document.head.appendChild(styleLink)
