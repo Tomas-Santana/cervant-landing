@@ -38,10 +38,9 @@ class Chatbubble {
     }
 }
 
-class CervantChat extends HTMLElement {
+class CervantChat {
 
     constructor({endpoint="cervant.chat", botName="Cervant", startMessage="Hello there", avatar="https://cervant.chat/images/logo.svg", userAvatar="https://cervant.chat/images/logo.svg"} = {}) {
-        super()
 
         const variables = document.createElement('style')
         variables.innerHTML = `
@@ -220,12 +219,6 @@ class CervantChat extends HTMLElement {
 }
 // global 
 const id = crypto.randomUUID()
-
-customElements.define('cervant-chat', Cervant)
-
-
-
-console.log("hello!")
 
 const styleLink = document.createElement('link')
 
