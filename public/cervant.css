@@ -172,6 +172,7 @@ dialog.dialog__cervant--closing {
     padding: 10px;
     height: 80px;
     gap: 10px;
+    padding-bottom: 0px;
 }
 
 .input-field__cervant input {
@@ -202,6 +203,25 @@ dialog.dialog__cervant--closing {
 
 .input-field__cervant button:hover {
     transform: rotate(-25deg);
+}
+
+.watermark__cervant {
+    padding: 0px 10px;
+    font-size: 0.8rem;
+    color: #8e8e8e;
+    padding-bottom: 5px;
+}
+
+.watermark__cervant p a {
+    text-decoration: underline;
+    transition: .2s ease;
+}
+.watermark__cervant p a:hover {
+    color: #000000;
+}
+
+.chat-link__cervant {
+    color: #3b5dd7;
 }
 
 .sr-only__cervant {

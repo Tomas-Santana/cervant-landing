@@ -19,25 +19,30 @@ class Chatbubble {
         const text = document.createElement('p')
         text.classList.add('chat-bubble-text__cervant')
 
-        
-        text.textContent = message
-
+        text.innerHTML = this.findLinks(message)
 
         this.messageContainer.appendChild(avatarContainer)
         this.messageContainer.appendChild(this.bubble)
         this.bubble.appendChild(text)
 
-
-        // document.body.appendChild(style)
+    }
+    findLinks(text) {
+        const regex = /(https?:\/\/[^\s]+)/g
+        const matches = text.match(regex)
+        if (matches) {
+            matches.forEach(match => {
+                text = text.replace(match, `<a href="${match}" class="chat-link__cervant" target="_blank">${match}</a>`)
+            })
+        }
+        return text
     }
 }
 
 class Cervant extends HTMLElement {
 
-    constructor(endpoint, apiKey, name, startMessage, avatar, userAvatar) {
+    constructor({endpoint="cervant.chat", botName="Cervant", startMessage="Hello there", avatar="https://cervant.chat/images/logo.svg", userAvatar="https://cervant.chat/images/logo.svg"} = {}) {
         super()
 
-        // set css variables
         const variables = document.createElement('style')
         variables.innerHTML = `
             :root {
@@ -46,12 +51,14 @@ class Cervant extends HTMLElement {
             }
         `
 
+
         document.head.appendChild(variables)
+
+        this.chatHistory = []
 
         this.avatar = avatar;
         this.userAvatar = userAvatar;
         this.endpoint = endpoint;
-        this.apiKey = apiKey;
 
         this.chatArea = document.createElement('div')
         this.chatArea.classList.add('chat-area__cervant')
@@ -59,13 +66,11 @@ class Cervant extends HTMLElement {
         this.chatAreaContainer = document.createElement('div')
         this.chatArea.appendChild(this.chatAreaContainer)
 
-        
         this.dialog = document.createElement('dialog')
         this.dialog.classList.add('dialog__cervant')
 
         this.openButton = document.createElement('button')
         this.openButton.classList.add('open-button__cervant')
-
 
         // dialog content
 
@@ -80,7 +85,7 @@ class Cervant extends HTMLElement {
         dialogContent.appendChild(this.chatArea)
 
         header.innerHTML = `
-            <h1>Ask ${name}</h1>
+            <h1>${botName} 🤖</h1>
             <button class="header-button__cervant">
                 <?xml version="1.0" encoding="UTF-8"?><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="none" stroke-width="1.5" viewBox="0 0 24 24" color="#000000"><path stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M6.758 17.243 12.001 12m5.243-5.243L12 12m0 0L6.758 6.757M12.001 12l5.243 5.243"></path></svg>
                 <span class="sr-only__cervant">Close</span>
@@ -94,7 +99,7 @@ class Cervant extends HTMLElement {
         inputFieldInput.classList.add('input-field-input__cervant')
 
         inputFieldInput.setAttribute('type', 'text')
-        inputFieldInput.setAttribute('placeholder', 'message')
+        inputFieldInput.setAttribute('placeholder', 'Mensaje')
 
         inputField.classList.add('input-field__cervant')
 
@@ -110,6 +115,11 @@ class Cervant extends HTMLElement {
         
         inputField.appendChild(inputFieldButton)
 
+        const watermark = document.createElement('div')
+        watermark.classList.add('watermark__cervant')
+        const watermarkText = document.createElement('p')
+        watermarkText.innerHTML = `Powered by <a href="https://cervant.chat" target="_blank">Cervant</a>`
+        watermark.appendChild(watermarkText)
         // chat logic
 
         inputFieldInput.addEventListener('keyup', (e) => {
@@ -139,8 +149,11 @@ class Cervant extends HTMLElement {
             })
         }
 
-        dialogContent.appendChild(inputField)
 
+        
+        dialogContent.appendChild(inputField)
+        
+        dialogContent.appendChild(watermark)
 
         this.dialog.appendChild(dialogContent);
 
@@ -158,7 +171,7 @@ class Cervant extends HTMLElement {
         })
     }
 
-    addToBody() {
+    init() {
         document.body.appendChild(this.dialog)
         document.body.appendChild(this.openButton)
     }
@@ -170,12 +183,15 @@ class Cervant extends HTMLElement {
         this.respond(message)
     }
 
-    respond(message) {
+
+    async respond(message) {
         const payload = {
+            conversation_id: id,
             message: message,
-            key: this.apiKey
+            isWarmup: false,
         }
-        const response = fetch(this.endpoint,
+        console.log(`fectching ${this.endpoint}`);
+        const response = await fetch(this.endpoint,
             {
                 method: 'POST',
                 headers: {
@@ -184,33 +200,35 @@ class Cervant extends HTMLElement {
                 body: JSON.stringify(payload)
             }
         )
-        .then(res => res.json())
-        .then(res => {
-            const bubble = new Chatbubble(res.message, 'cervant', this.avatar)
-            this.chatAreaContainer.appendChild(bubble.messageContainer)
-        })
+
+        if (response.status !== 200) {
+            console.log('error')
+            const errBubble = new Chatbubble('Sorry, something went wrong', 'bot', this.avatar)
+            this.chatAreaContainer.appendChild(errBubble.messageContainer)
+            return
+        }
+
+        const data = await response.json()
+
+        const responseText = data.response
         
+        const bubble = new Chatbubble(responseText, 'bot', this.avatar)
+        this.chatAreaContainer.appendChild(bubble.messageContainer)
+        
+        this.chatHistory.push({message: message, response: responseText})
     }
 }
 // global 
-
+const id = crypto.randomUUID()
 
 customElements.define('cervant-chat', Cervant)
 
-const chat = new Cervant(
-    'none',
-    "popo",
-    'Cervant',
-    'Hello there!',
-    'https://www.thegreenhead.com/imgs/xl/genuine-lifesize-lost-in-space-b-9-robot-xl.jpg', 
-    'https://img.myloview.com/stickers/user-icon-human-person-symbol-avatar-login-sign-400-260980474.jpg'
-)
-chat.addToBody()
+
 
 console.log("hello!")
 
 const styleLink = document.createElement('link')
 
 styleLink.setAttribute('rel', 'stylesheet')
-styleLink.setAttribute('href', '/cervant.css')
+styleLink.setAttribute('href', 'https://raw.githack.com/Tomas-Santana/cervant-web-widget/main/src/cervant.css')
 document.head.appendChild(styleLink)
