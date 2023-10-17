@@ -9,7 +9,7 @@ import Layout from "@layouts/Layout.astro";
   <Container>
     <script is:inline src="https://raw.githubusercontent.com/Tomas-Santana/cervant-web-widget/main/src/cervant.js"></script>
     <script is:inline>
-      const chat = new Cervant({
+      const chat = new CervantChat({
         endpoint:'https://showcase-bot-3.azurewebsites.net/webchat',
         botName:'Aguibot',
         startMessage:'Hola amigo! Soy aguibot, estoy aqui para ayudarte!',

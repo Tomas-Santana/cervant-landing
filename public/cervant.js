@@ -38,7 +38,7 @@ class Chatbubble {
     }
 }
 
-class Cervant extends HTMLElement {
+class CervantChat extends HTMLElement {
 
     constructor({endpoint="cervant.chat", botName="Cervant", startMessage="Hello there", avatar="https://cervant.chat/images/logo.svg", userAvatar="https://cervant.chat/images/logo.svg"} = {}) {
         super()
