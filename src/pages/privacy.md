@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogLayout.astro
+layout: ../layouts/BlogLayout.astro
 title: Política de privacidad
 gist: Descubre cómo se tratan tus datos.
 tags: []

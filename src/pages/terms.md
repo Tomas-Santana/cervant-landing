@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogLayout.astro
+layout: ../layouts/BlogLayout.astro
 title: Términos de uso
 description: 
 tags: []
