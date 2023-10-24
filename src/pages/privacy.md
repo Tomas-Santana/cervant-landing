@@ -4,7 +4,7 @@ title: Política de privacidad
 gist: Descubre cómo se tratan tus datos.
 tags: []
 ---
-Last updated: 23/03/2023
+Actualizada por última vez: 23/03/2023
 
 Para Cervant es de vital importancia la seguridad de los datos de sus usuarios. Le solicitamos que lea cuidadosamente la siguiente Política de Privacidad y Tratamiento de Datos Personales. Al ingresar como usuario de los servicios o productos que brinda Cervant por medio de sus medios digitales, usted acepta todos los términos y condiciones establecidos.
 

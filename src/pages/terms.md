@@ -4,7 +4,7 @@ title: Términos de uso
 description: 
 tags: []
 ---
-Last updated: 23/03/2023
+Actualizada por última vez: 23/03/2023
 
 ## Introducción
 
