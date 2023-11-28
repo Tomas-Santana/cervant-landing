@@ -1,0 +1,42 @@
+---
+import Icon from "astro-icon";
+
+
+interface Props {
+    text: string;
+    bannerIcon?: string;
+    action: string;
+}
+
+const {action, bannerIcon, text} = Astro.props
+---
+
+<div class="banner p-3">
+    <a href={action} target="_blank" class="gap-7 sm:gap-5">
+        <div class="banner__icon w-8">
+            <Icon name={bannerIcon} />
+        </div>
+        <div class="banner__text text-lg max-sm:text-sm">
+            { text }
+        </div>
+    </a>
+</div>
+
+<style>
+    .banner {
+        background-color: black;
+        color: white;
+    }
+    .banner a {
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .banner:hover .banner__text {
+        text-decoration: underline;
+    }
+
+
+</style>
