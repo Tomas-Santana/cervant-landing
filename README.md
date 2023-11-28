@@ -1,3 +1,3 @@
 # Cervant landing page
 
-Nothing to see here... yet.
+[Check it out!](https://cervant.chat)
